@@ -66,6 +66,26 @@ class Gaussian(Distribution):
 		self.stdev = sigma
 		
 		return self.stdev
+	
+
+	def newton_method(f,df,x0,epsilon,max_iter):
+	xn=x0
+
+	for i in range(0,max_iter):
+		if(abs(f(xn))<epsilon):
+		return "Solution found : {}".format(xn)
+
+		if(df(xn)==0):
+		return "Zero Derivative: Solution Not Found !"
+
+		xn = xn - (f((xn))/df(xn))
+
+	return None
+
+	p = lambda x: x**3 - x**2 - 1
+	Dp = lambda x: 3*x**2 - 2*x
+	approx = newton_method(p,Dp,1,1e-10,10)
+	print(approx)
 		
 
 	def read_data_file(self, file_name, sample=True):
